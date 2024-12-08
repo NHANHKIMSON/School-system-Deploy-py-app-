@@ -1,12 +1,21 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# Database Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost/crud_py'
+# Use environment variable for database URI
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    'DATABASE_URL', 
+    'postgresql://crud_py_user:BThsvgJOW8m46DdUslTzu4kEuvvnfWEp@dpg-ctaoo823esus739c1jo0-a.oregon-postgres.render.com/crud_py'
+)
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+
+
+
 
 # Define Contact Model
 class Contact(db.Model):
@@ -28,9 +37,17 @@ class Contact(db.Model):
     phone = db.Column(db.String(15), nullable=False)
     email = db.Column(db.String(100), unique=True)
 
-# Initialize Database
+# # Initialize Database
+# with app.app_context():
+#     db.create_all()
+
+
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()  # This will create tables if they don't exist
+        print("Database connection successful!")
+    except Exception as e:
+        print(f"Database connection failed: {e}")
 
 @app.route('/')
 def index():
