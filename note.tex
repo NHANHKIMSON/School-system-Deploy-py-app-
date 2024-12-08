@@ -1,0 +1,27 @@
+python3 -m venv env
+source env/bin/activate
+python3 -m pip install --upgrade pip
+pip install flask
+pip install flask-wtf
+pip install flask-sqlalchemy
+
+
+pip install flask-sqlalchemy psycopg2
+
+
+
+
+
+
+
+
+
+
+
+project/
+├── app.py              # Main Application
+├── templates/
+├── static/
+├── users/              # Blueprint Folder
+│   ├── __init__.py     # Blueprint Initialization
+│   ├── routes.py       # Routes for Users

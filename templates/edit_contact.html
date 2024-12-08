@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Contact</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="name" class="form-control bg-dark text-light" value="{{ contact.name }}" required>
+        </div>
+        <div class="form-group">
+            <label>Sex:</label>
+            <select name="sex" class="form-control bg-dark text-light" required>
+                <option value="Male" {% if contact.sex == "Male" %}selected{% endif %}>Male</option>
+                <option value="Female" {% if contact.sex == "Female" %}selected{% endif %}>Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Math:</label>
+            <input type="number" step="0.01" name="score_i" class="form-control bg-dark text-light" value="{{ contact.score_i }}" required>
+        </div>
+        <div class="form-group">
+            <label>Khmer:</label>
+            <input type="number" step="0.01" name="score_ii" class="form-control bg-dark text-light" value="{{ contact.score_ii }}" required>
+        </div>
+        <div class="form-group">
+            <label>English:</label>
+            <input type="number" step="0.01" name="score_iii" class="form-control bg-dark text-light" value="{{ contact.score_iii }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="psychical_score" class="form-label">Psychical Score</label>
+            <input type="number" step="0.01" class="form-control bg-dark text-light" id="psychical_score" name="psychical_score" value="{{ contact.psychical_score }}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="chemistry_score" class="form-label">Chemistry Score</label>
+            <input type="number" step="0.01" class="form-control bg-dark text-light" id="chemistry_score" name="chemistry_score" value="{{ contact.chemistry_score }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Phone:</label>
+            <input type="text" name="phone" class="form-control bg-dark text-light" value="{{ contact.phone }}" required>
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" class="form-control bg-dark text-light" value="{{ contact.email }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary my-3 float-end">Update Contact</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary float-end my-3 me-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}
